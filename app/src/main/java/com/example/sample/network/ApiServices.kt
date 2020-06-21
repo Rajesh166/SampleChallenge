@@ -14,5 +14,5 @@ interface ApiServices {
             @Query("lng") lng: Double): Response<List<Restaurant>>
 
     @GET("v2/restaurant/{restaurantId}")
-    suspend fun getRestaurantDetails(@Path("restaurantId") movieId: Int): Response<Restaurant>
+    suspend fun getRestaurantDetails(@Path("restaurantId") movieId: Long): Response<Restaurant>
 }

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="restaurant"
+            type="com.example.sample.response.Restaurant" />
+        <variable
+            name="viewModel"
+            type="com.example.sample.viewmodels.RestaurantDetailsViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/background_light">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingBottom="24dp"
+            tools:context=".ui.MovieDetailFragment">
+
+            <ImageView
+                android:id="@+id/coverImage"
+                loadUrl="@{viewModel.detailsData.coverImage}"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_arrow_back"
+                android:background="@drawable/bg_transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/restaurant_title"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="32dp"
+                android:maxLines="2"
+                android:text="@{viewModel.detailsData.name}"
+                android:textSize="22sp"
+                app:layout_constraintTop_toBottomOf="@id/coverImage"
+                tools:text="Birds of Prey " />
+
+            <ProgressBar
+                android:id="@+id/loading"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintEnd_toEndOf="@id/restaurant_title"
+                app:layout_constraintStart_toStartOf="@id/restaurant_title"
+                app:layout_constraintTop_toBottomOf="@id/restaurant_title"
+                tools:visibility="gone" />
+
+            <TextView
+                android:id="@+id/msg"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/wait_for_loading"
+                android:textSize="18sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/loading"
+                app:layout_constraintStart_toStartOf="@id/loading"
+                app:layout_constraintTop_toBottomOf="@id/loading"
+                tools:visibility="gone" />
+
+            <Button
+                android:id="@+id/retry"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/retry"
+                android:textAllCaps="false"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="20sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/msg"
+                app:layout_constraintStart_toStartOf="@id/msg"
+                app:layout_constraintTop_toBottomOf="@id/msg"
+                tools:visibility="gone" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/details_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/restaurant_title"
+                app:layout_constraintStart_toStartOf="@id/restaurant_title"
+                app:layout_constraintTop_toBottomOf="@id/restaurant_title"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/status"
+                    style="@style/TextAppearance.MaterialComponents.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:drawablePadding="4dp"
+                    android:text="@{viewModel.detailsData.status}"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="20min" />
+
+                <TextView
+                    android:id="@+id/rating"
+                    style="@style/TextAppearance.MaterialComponents.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:text="@{`Average Rating: ` + viewModel.detailsData.rating}"
+                    android:textSize="20sp"
+                    android:visibility="@{viewModel.detailsData.rating > 0 ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintStart_toStartOf="@id/status"
+                    app:layout_constraintTop_toBottomOf="@id/status"
+                    tools:text="4.5" />
+
+                <TextView
+                    android:id="@+id/phone_number"
+                    style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@{`Contact No.: ` + viewModel.detailsData.phoneNumber}"
+                    android:visibility="@{viewModel.detailsData.phoneNumber.length() > 0 ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rating"
+                    tools:text="123456789" />
+
+                <TextView
+                    android:id="@+id/description"
+                    style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@{viewModel.detailsData.description}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/phone_number"
+                    tools:text="@tools:sample/lorem/random" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>

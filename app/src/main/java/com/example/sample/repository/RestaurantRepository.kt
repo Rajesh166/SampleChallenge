@@ -25,7 +25,7 @@ class RestaurantRepository(private val webservice: ApiServices): BaseRepository(
         )
     }
 
-    suspend fun getRestaurantDetails(movieId: Int): Result<Restaurant> {
+    suspend fun getRestaurantDetails(movieId: Long): Result<Restaurant> {
         return safeApiCall("Something went wrong. Please Retry.",
                 call = {
                     val response = webservice.getRestaurantDetails(movieId)

@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +17,7 @@ import com.example.sample.databinding.FragmentRestaurantListBinding
 import com.example.sample.network.RestaurantApiClient
 import com.example.sample.repository.RestaurantRepository
 import com.example.sample.response.EventObserver
+import com.example.sample.response.Restaurant
 import com.example.sample.viewmodels.RestaurantListViewModelFactory
 import com.example.sample.viewmodels.RestaurantViewModel
 
@@ -71,7 +74,7 @@ class RestaurantListFragment : Fragment() {
                     showError(it.errorMsg)
                 }
                 is RestaurantViewModel.ViewEvent.NavigateToDetail -> {
-
+                    launchRestaurantDetailFragment(it.data)
                 }
             }
         })
@@ -94,4 +97,22 @@ class RestaurantListFragment : Fragment() {
         }
         binding.btRetry.visibility = View.VISIBLE
     }
+
+    private fun launchRestaurantDetailFragment(restaurant: Restaurant) {
+
+        val fragmentManager = (context as FragmentActivity).supportFragmentManager
+        val detailFragment = fragmentManager.findFragmentByTag(RestaurantDetailsFragment.FRAGMENT_TAG)
+
+        if (detailFragment == null) {
+            fragmentManager.commit {
+                addToBackStack(this@RestaurantListFragment::class.java.simpleName)
+                add(
+                        R.id.container,
+                        RestaurantDetailsFragment.getInstance(restaurant),
+                        RestaurantDetailsFragment.FRAGMENT_TAG
+                )
+            }
+        }
+    }
+
 }

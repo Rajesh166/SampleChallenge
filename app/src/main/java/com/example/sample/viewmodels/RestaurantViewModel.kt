@@ -7,11 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.sample.repository.RestaurantRepository
 import com.example.sample.response.Event
 import com.example.sample.response.Restaurant
-import kotlinx.coroutines.launch
 import com.example.sample.response.Result
+import kotlinx.coroutines.launch
 
 
 class RestaurantViewModel(private val restaurantRepository: RestaurantRepository) : ViewModel() {
+
+    private lateinit var restaurant:Restaurant
 
     private val restaurantsList: MutableLiveData<List<Restaurant>> by lazy {
         MutableLiveData<List<Restaurant>>().also {
