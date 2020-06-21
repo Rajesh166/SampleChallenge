@@ -3,7 +3,7 @@ package com.example.sample.network
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 
 object RestaurantApiClient {
     private const val BASE_URL = "https://api.doordash.com/v2/restaurant/"
@@ -11,7 +11,7 @@ object RestaurantApiClient {
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(MoshiConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build()
     }
@@ -31,4 +31,5 @@ object RestaurantApiClient {
     val apiServices: ApiServices by lazy {
         retrofit.create(ApiServices::class.java)
     }
+
 }
