@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RestaurantApiClient {
-    private const val BASE_URL = "https://api.doordash.com/v2/restaurant/"
+    private const val BASE_URL = "https://api.doordash.com/"
 
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()

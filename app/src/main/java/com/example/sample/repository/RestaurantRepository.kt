@@ -1,29 +1,42 @@
 package com.example.sample.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.sample.network.ApiServices
 import com.example.sample.response.Restaurant
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.sample.response.Result
 
-class RestaurantRepository(private val webservice: ApiServices) {
+class RestaurantRepository(private val webservice: ApiServices): BaseRepository() {
     private val DEFAULT_LAT = 37.422740
-    private val DEFAULT_LNG = 37.422740
+    private val DEFAULT_LNG = -122.139956
 
-    val restaurantList: LiveData<List<Restaurant>>
-        get() {
-            val data = MutableLiveData<List<Restaurant>>()
-            webservice.fetchRestaurants(37.422740,-122.139956).enqueue(object : Callback<List<Restaurant>> {
-                override fun onResponse(call: Call<List<Restaurant>>, response: Response<List<Restaurant>>) {
-                    data.value = response.body()
+    suspend fun fetchRestaurants(): Result<List<Restaurant>> {
+        return safeApiCall("Something went wrong. Please Retry.",
+                call = {
+                    val response = webservice.fetchRestaurants(37.422740,-122.139956)
+                    if (response.isSuccessful) {
+                        if (response.body() != null)
+                            Result.Success(response.body()!!)
+                        else {
+                            Result.Error("No Data found")
+                        }
+                    } else {
+                        Result.Error(response.errorBody().toString())
+                    }
                 }
+        )
+    }
 
-                override fun onFailure(call: Call<List<Restaurant>>, t: Throwable) {
-                    data.value = null
-                }
-            })
-            return data
-        }
+    suspend fun getRestaurantDetails(movieId: Int): Result<Restaurant> {
+        return safeApiCall("Something went wrong. Please Retry.",
+                call = {
+                    val response = webservice.getRestaurantDetails(movieId)
+                    if (response.isSuccessful) {
+                        if (response.body() != null)
+                           Result.Success(response.body()!!)
+                        else
+                            Result.Error("No Data found")
+                    } else {
+                        Result.Error(response.errorBody().toString())
+                    }
+                })
+    }
 }

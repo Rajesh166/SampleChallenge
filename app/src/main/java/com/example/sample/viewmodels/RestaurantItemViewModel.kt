@@ -11,6 +11,6 @@ class RestaurantItemViewModel(
     val onRestaurantClickListener: View.OnClickListener
         @Bindable
         get() = View.OnClickListener {
-            //viewModel.openRestaurant(data)
+            viewModel.onRestaurantItemClick(restaurant = data)
         }
 }

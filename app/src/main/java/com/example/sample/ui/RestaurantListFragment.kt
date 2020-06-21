@@ -6,14 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sample.R
 import com.example.sample.adapters.RestaurantListAdapter
 import com.example.sample.databinding.FragmentRestaurantListBinding
 import com.example.sample.network.RestaurantApiClient
 import com.example.sample.repository.RestaurantRepository
+import com.example.sample.response.EventObserver
+import com.example.sample.viewmodels.RestaurantListViewModelFactory
 import com.example.sample.viewmodels.RestaurantViewModel
 
 class RestaurantListFragment : Fragment() {
@@ -21,13 +23,13 @@ class RestaurantListFragment : Fragment() {
 
     private lateinit var restaurantAdapter: RestaurantListAdapter
 
-    private lateinit var viewModel: RestaurantViewModel
+    private val viewModel: RestaurantViewModel by viewModels {
+        RestaurantListViewModelFactory(RestaurantRepository(RestaurantApiClient.apiServices))
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_restaurant_list, container, false)
-        viewModel = ViewModelProviders.of(this).get(RestaurantViewModel::class.java)
-        viewModel.init(repo = RestaurantRepository(RestaurantApiClient.apiServices))
         binding.viewModel = viewModel
         initView()
         return binding.root
@@ -53,11 +55,25 @@ class RestaurantListFragment : Fragment() {
             adapter = restaurantAdapter
         }
 
-        val itemsSize = viewModel.restaurantsList?.value?.size ?: 0
+        val itemsSize = viewModel.fetchRestaurants()?.value?.size ?: 0
         if (itemsSize > 0) hideLoading()
-        viewModel.restaurantsList?.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.fetchRestaurants()?.observe(viewLifecycleOwner, Observer { response ->
             if (response.isNotEmpty()) hideLoading()
             restaurantAdapter.submitListFilterable(response.toMutableList())
+        })
+
+        viewModel.getEvents().observe(viewLifecycleOwner, EventObserver {
+            when (it) {
+                is RestaurantViewModel.ViewEvent.FinishedLoading -> {
+                    hideLoading()
+                }
+                is RestaurantViewModel.ViewEvent.ShowError -> {
+                    showError(it.errorMsg)
+                }
+                is RestaurantViewModel.ViewEvent.NavigateToDetail -> {
+
+                }
+            }
         })
     }
 

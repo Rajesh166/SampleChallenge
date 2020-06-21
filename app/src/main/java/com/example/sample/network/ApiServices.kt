@@ -1,14 +1,18 @@
 package com.example.sample.network
 
 import com.example.sample.response.Restaurant
-import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiServices {
 
-    @GET(".")
-    fun fetchRestaurants(
+    @GET("v2/restaurant/")
+    suspend fun fetchRestaurants(
             @Query("lat") lat: Double,
-            @Query("lng") lng: Double): Call<List<Restaurant>>
+            @Query("lng") lng: Double): Response<List<Restaurant>>
+
+    @GET("v2/restaurant/{restaurantId}")
+    suspend fun getRestaurantDetails(@Path("restaurantId") movieId: Int): Response<Restaurant>
 }
