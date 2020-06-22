@@ -48,10 +48,10 @@ class RestaurantListFragment : Fragment() {
     private fun initView() {
         binding.apply {
             rvRestaurantList.layoutManager = LinearLayoutManager(activity)
-            btRetry.setOnClickListener {
-                pbLoading.visibility = View.VISIBLE
-                btRetry.visibility = View.GONE
-                tvScreenMsg.text = getString(R.string.wait_for_loading)
+            retry.setOnClickListener {
+                loading.visibility = View.VISIBLE
+                retry.visibility = View.GONE
+                errorMessage.text = getString(R.string.wait_for_loading)
                 viewModel?.retryLoading()
             }
         }
@@ -89,20 +89,20 @@ class RestaurantListFragment : Fragment() {
 
     private fun hideLoading() {
         binding.apply {
-            tvScreenMsg.visibility = View.GONE
-            pbLoading.visibility = View.GONE
-            btRetry.visibility = View.GONE
+            errorMessage.visibility = View.GONE
+            loading.visibility = View.GONE
+            retry.visibility = View.GONE
         }
     }
 
     private fun showError(message: String) {
         hideLoading()
-        binding.tvScreenMsg.apply {
+        binding.errorMessage.apply {
             visibility = View.VISIBLE
             text = message
 
         }
-        binding.btRetry.visibility = View.VISIBLE
+        binding.retry.visibility = View.VISIBLE
     }
 
     private fun launchRestaurantDetailFragment(restaurant: Restaurant) {
