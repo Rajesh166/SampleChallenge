@@ -37,7 +37,7 @@
             tools:listitem="@layout/item_view" />
 
         <TextView
-            android:id="@+id/tv_screen_msg"
+            android:id="@+id/error_message"
             style="@style/TextAppearance.AppCompat.Body2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,16 +49,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
-            android:id="@+id/pb_loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/loading"
+            android:layout_width="@dimen/progress_bar_width"
+            android:layout_height="@dimen/progress_bar_width"
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@id/tv_screen_msg"
-            app:layout_constraintEnd_toEndOf="@id/tv_screen_msg"
-            app:layout_constraintStart_toStartOf="@id/tv_screen_msg" />
+            app:layout_constraintBottom_toTopOf="@id/error_message"
+            app:layout_constraintEnd_toEndOf="@id/error_message"
+            app:layout_constraintStart_toStartOf="@id/error_message" />
 
         <Button
-            android:id="@+id/bt_retry"
+            android:id="@+id/retry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -66,9 +66,9 @@
             android:textAllCaps="false"
             android:textSize="20sp"
             android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@id/tv_screen_msg"
-            app:layout_constraintStart_toStartOf="@id/tv_screen_msg"
-            app:layout_constraintTop_toBottomOf="@id/tv_screen_msg"
+            app:layout_constraintEnd_toEndOf="@id/error_message"
+            app:layout_constraintStart_toStartOf="@id/error_message"
+            app:layout_constraintTop_toBottomOf="@id/error_message"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

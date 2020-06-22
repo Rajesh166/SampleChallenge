@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="progress_bar_width">40dp</dimen>
+    <dimen name="progress_bar_height">40dp</dimen>
+    <dimen name="cover_image_height">180dp</dimen>
+    <dimen name="cover_image_height_details_fragment">220dp</dimen>
+</resources>

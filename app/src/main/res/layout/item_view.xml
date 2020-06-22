@@ -27,7 +27,7 @@
                 android:id="@+id/poster"
                 loadUrl="@{viewModel.data.coverImage}"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="@dimen/cover_image_height"
                 android:contentDescription="@string/restaurant_cover_image"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toTopOf="@+id/restaurant_title"

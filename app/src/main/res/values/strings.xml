@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Sample</string>
     <string name="retry">Retry</string>
-    <string name="wait_for_loading">loading...</string>
+    <string name="wait_for_loading">loading…</string>
     <string name="restaurant_cover_image">Restaurant Cover Image</string>
+    <string name="error_message">"Something went wrong. Please Retry."</string>
 </resources>
