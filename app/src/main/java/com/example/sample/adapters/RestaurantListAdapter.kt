@@ -31,12 +31,12 @@ class RestaurantListAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            MovieVH(DataBindingUtil.inflate(
+            RestaurantItemViewHolder(DataBindingUtil.inflate(
                     LayoutInflater.from(parent.context),
                     R.layout.item_view, parent, false))
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is MovieVH) {
+        if (holder is RestaurantItemViewHolder) {
             viewModel?.let {
                 holder.binding.viewModel = RestaurantItemViewModel(
                         getItem(position), viewModel
@@ -53,5 +53,5 @@ class RestaurantListAdapter(
 
 }
 
-class MovieVH(val binding: ItemViewBinding) : RecyclerView.ViewHolder(binding.root)
+class RestaurantItemViewHolder(val binding: ItemViewBinding) : RecyclerView.ViewHolder(binding.root)
 
