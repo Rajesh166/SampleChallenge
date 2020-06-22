@@ -42,6 +42,12 @@ class RestaurantDetailsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_restaurant_details, container, false)
+
+        if (savedInstanceState != null) {
+            restaurant = savedInstanceState.getSerializable(EXTRA_RESTAURANT_DATA) as Restaurant
+            hideLoading()
+        }
+
         binding.restaurant = restaurant
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -109,6 +115,11 @@ class RestaurantDetailsFragment : Fragment() {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return RestaurantDetailsViewModel(repo, restaurant) as T
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putSerializable(EXTRA_RESTAURANT_DATA, restaurant)
     }
 
 }
