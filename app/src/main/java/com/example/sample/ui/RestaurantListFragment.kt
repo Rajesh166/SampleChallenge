@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -34,8 +35,14 @@ class RestaurantListFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_restaurant_list, container, false)
         binding.viewModel = viewModel
+        initToolBar()
         initView()
         return binding.root
+    }
+
+    private fun initToolBar() {
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        (activity as AppCompatActivity).supportActionBar?.title = "Discover"
     }
 
     private fun initView() {

@@ -12,5 +12,13 @@ data class Restaurant(
         @SerializedName("status_type") val statusType: String,
         @SerializedName("average_rating") val rating: Double,
         @SerializedName("delivery_fee") val deliveryFee: Double,
-        @SerializedName("cover_img_url") val coverImage: String
-) : Serializable
+        @SerializedName("cover_img_url") val coverImage: String) : Serializable {
+
+    val statusUpdate: String
+    get() = formatStatusUpdate()
+
+    private fun formatStatusUpdate(): String {
+        return if (statusType.isNotEmpty() && statusType == "open") status else "Closed"
+    }
+
+}
