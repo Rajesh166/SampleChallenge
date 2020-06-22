@@ -10,10 +10,10 @@ import com.example.sample.R
 import com.example.sample.databinding.ItemViewBinding
 import com.example.sample.response.Restaurant
 import com.example.sample.viewmodels.RestaurantItemViewModel
-import com.example.sample.viewmodels.RestaurantViewModel
+import com.example.sample.viewmodels.RestaurantListViewModel
 
 class RestaurantListAdapter(
-        private val viewModel: RestaurantViewModel?,
+        private val viewModel: RestaurantListViewModel?,
         private val itemType: Int) : ListAdapter<Restaurant, RecyclerView.ViewHolder>(RestaurantCallBack()){
 
     companion object {

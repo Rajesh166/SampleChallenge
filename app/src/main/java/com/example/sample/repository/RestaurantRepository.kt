@@ -11,7 +11,7 @@ class RestaurantRepository(private val webservice: ApiServices): BaseRepository(
         const val DEFAULT_LNG = -122.139956
     }
 
-    private suspend fun fetchRestaurants(latitude: Double, longitude: Double): Result<List<Restaurant>> {
+    suspend fun fetchRestaurants(latitude: Double, longitude: Double): Result<List<Restaurant>> {
         return safeApiCall("Something went wrong. Please Retry.",
                 call = {
                     val response = webservice.fetchRestaurants(latitude, longitude)

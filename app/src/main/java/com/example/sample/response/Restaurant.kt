@@ -13,7 +13,8 @@ data class Restaurant(
         @SerializedName("average_rating") var rating: Double = 0.0,
         @SerializedName("number_of_ratings") var numberOfRatings: Int = 0,
         @SerializedName("delivery_fee") val deliveryFee: Double = 0.0,
-        @SerializedName("cover_img_url") val coverImage: String = "") : Serializable {
+        @SerializedName("cover_img_url") val coverImage: String = "",
+        val menus: List<Menu>? = null) : Serializable {
 
     val statusUpdate: String
         get() = formatStatusUpdate()
@@ -30,3 +31,8 @@ data class Restaurant(
         return "$rating ($numberOfRatings Users)"
     }
 }
+
+data class Menu(
+        var status: String = "",
+        var subtitle: String = "",
+        var name: String = "")

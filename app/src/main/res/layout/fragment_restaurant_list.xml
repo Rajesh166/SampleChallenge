@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.sample.viewmodels.RestaurantViewModel" />
+            type="com.example.sample.viewmodels.RestaurantListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

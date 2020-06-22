@@ -20,14 +20,14 @@ import com.example.sample.repository.RestaurantRepository
 import com.example.sample.response.EventObserver
 import com.example.sample.response.Restaurant
 import com.example.sample.viewmodels.RestaurantListViewModelFactory
-import com.example.sample.viewmodels.RestaurantViewModel
+import com.example.sample.viewmodels.RestaurantListViewModel
 
 class RestaurantListFragment : Fragment() {
     private lateinit var binding: FragmentRestaurantListBinding
 
     private lateinit var restaurantAdapter: RestaurantListAdapter
 
-    private val viewModel: RestaurantViewModel by viewModels {
+    private val viewModel: RestaurantListViewModel by viewModels {
         RestaurantListViewModelFactory(RestaurantRepository(RestaurantApiClient.apiServices))
     }
 
@@ -74,13 +74,13 @@ class RestaurantListFragment : Fragment() {
 
         viewModel.getEvents().observe(viewLifecycleOwner, EventObserver {
             when (it) {
-                is RestaurantViewModel.ViewEvent.FinishedLoading -> {
+                is RestaurantListViewModel.ViewEvent.FinishedLoading -> {
                     hideLoading()
                 }
-                is RestaurantViewModel.ViewEvent.ShowError -> {
+                is RestaurantListViewModel.ViewEvent.ShowError -> {
                     showError(it.errorMsg)
                 }
-                is RestaurantViewModel.ViewEvent.NavigateToDetail -> {
+                is RestaurantListViewModel.ViewEvent.NavigateToDetail -> {
                     launchRestaurantDetailFragment(it.data)
                 }
             }

@@ -11,7 +11,7 @@ import com.example.sample.response.Result
 import kotlinx.coroutines.launch
 
 
-class RestaurantViewModel(private val restaurantRepository: RestaurantRepository) : ViewModel() {
+class RestaurantListViewModel(private val restaurantRepository: RestaurantRepository) : ViewModel() {
 
     private lateinit var restaurant:Restaurant
 

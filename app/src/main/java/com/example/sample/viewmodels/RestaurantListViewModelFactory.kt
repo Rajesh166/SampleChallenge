@@ -6,5 +6,5 @@ import com.example.sample.repository.RestaurantRepository
 
 class RestaurantListViewModelFactory(private val repo: RestaurantRepository) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel?> create(modelClass: Class<T>) =
-                RestaurantViewModel(repo) as T
+                RestaurantListViewModel(repo) as T
     }

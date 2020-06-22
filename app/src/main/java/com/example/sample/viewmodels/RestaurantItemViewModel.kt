@@ -6,7 +6,7 @@ import androidx.databinding.Bindable
 import com.example.sample.response.Restaurant
 
 class RestaurantItemViewModel(
-        val data: Restaurant, private val viewModel: RestaurantViewModel) : BaseObservable() {
+        val data: Restaurant, private val viewModel: RestaurantListViewModel) : BaseObservable() {
 
     val onRestaurantClickListener: View.OnClickListener
         @Bindable
