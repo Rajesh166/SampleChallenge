@@ -70,8 +70,10 @@ class RestaurantDetailsFragment : Fragment() {
             }
         })
 
+        viewModel.loadRestaurantDetailsData()
+
         binding.retry.setOnClickListener {
-            viewModel.retryLoading()
+            viewModel.loadRestaurantDetailsData()
         }
 
         binding.back.setOnClickListener {

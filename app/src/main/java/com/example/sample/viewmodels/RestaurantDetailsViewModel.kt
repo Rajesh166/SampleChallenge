@@ -12,11 +12,7 @@ import kotlinx.coroutines.launch
 
 class RestaurantDetailsViewModel(private val restaurantRepository: RestaurantRepository, val restaurant: Restaurant) : ViewModel() {
 
-    private val restaurantDetails: MutableLiveData<Restaurant> by lazy {
-        MutableLiveData<Restaurant>().also {
-            loadRestaurantDetailsData()
-        }
-    }
+    private val restaurantDetails: MutableLiveData<Restaurant> = MutableLiveData()
 
     private val event: MutableLiveData<Event<ViewEvent>> by lazy {
         MutableLiveData<Event<ViewEvent>>()
@@ -28,11 +24,7 @@ class RestaurantDetailsViewModel(private val restaurantRepository: RestaurantRep
         return event
     }
 
-    fun retryLoading() {
-        loadRestaurantDetailsData()
-    }
-
-    private fun loadRestaurantDetailsData() {
+    fun loadRestaurantDetailsData() {
         viewModelScope.launch {
             when (val synopsisResult =  restaurantRepository.getRestaurantDetails(restaurant.id)) {
                 is Result.Success -> {

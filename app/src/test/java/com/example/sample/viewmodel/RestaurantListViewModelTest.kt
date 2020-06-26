@@ -46,14 +46,42 @@ class RestaurantListViewModelTest: BaseTest() {
 
         runBlockingTest {
             // When
-            viewModel.retryLoading()
+            viewModel.loadRestaurants()
         }
 
         Assert.assertEquals(response.body(), viewModel.getRestaurantList().value)
+
+        Assert.assertEquals(10, viewModel.getRestaurantList().value?.size)
+        Assert.assertEquals(0L, viewModel.getRestaurantList().value?.get(0)?.id)
+        Assert.assertEquals("Title of 0", viewModel.getRestaurantList().value?.get(0)?.description)
+
     }
+
+    @Test
+    fun `fetch Restaurant List when list empty`() {
+
+        //given
+        coEvery {
+            restaurantRepository.fetchRestaurants()
+        } returns mockErrorResult()
+
+        runBlockingTest {
+            // When
+            viewModel.loadRestaurants()
+        }
+
+        viewModel.getRestaurantList().value?.apply {
+            isEmpty().let { Assert.assertTrue(it) }
+        }
+    }
+
 
     private fun mockResult() : Result<List<Restaurant>> {
         return Result.Success(listResponse)
+    }
+
+    private fun mockErrorResult() : Result<Nothing> {
+        return Result.Error("Please try again")
     }
 
 }

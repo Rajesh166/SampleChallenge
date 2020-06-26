@@ -1,4 +1,4 @@
-/*
+
 
 package com.example.sample.viewmodel
 
@@ -44,10 +44,11 @@ class RestaurantDetailsViewModelTest: BaseTest() {
 
         runBlockingTest {
             //when
-            viewModel.retryLoading()
+            viewModel.loadRestaurantDetailsData()
             Assert.assertNotNull(viewModel.getDetailsData().value)
-        }
+            Assert.assertEquals(30L, viewModel.getDetailsData().value?.id)
 
+        }
 
     }
 
@@ -58,4 +59,4 @@ class RestaurantDetailsViewModelTest: BaseTest() {
     }
 
 }
-*/
+
