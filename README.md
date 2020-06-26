@@ -8,10 +8,12 @@ Used Kotlin co-routine framework.
 
 Followed MVVM Architecture.
 
-TODO:
-1) Add offset and limit to get list of items instead of loading complete list
-2) Add better test coverage for co-routine components.
+
 
 
 Issues to be addressed:
-When using also along with lazy intialization of variables had few JDK issues like (same as https://github.com/Kotlin/kotlinx.coroutines/issues/1300) running unit tests. To avoid this issue removed the lazy initialization of variables from viewmodels
+When using also along with lazy intialization of variables had few JDK issues like (same as https://github.com/Kotlin/kotlinx.coroutines/issues/1300) running unit tests. To avoid this issue removed the lazy initialization of variables from viewmodels.
+
+TODO:
+1) Add offset and limit to get list of items instead of loading complete list
+2) Add better test coverage for co-routine components.
