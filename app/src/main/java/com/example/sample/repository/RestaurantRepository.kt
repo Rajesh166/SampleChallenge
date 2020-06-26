@@ -4,7 +4,7 @@ import com.example.sample.network.ApiServices
 import com.example.sample.response.Restaurant
 import com.example.sample.response.Result
 
-class RestaurantRepository(private val webservice: ApiServices): BaseRepository() {
+open class RestaurantRepository(private val webservice: ApiServices): BaseRepository() {
 
     companion object {
         const val DEFAULT_LAT = 37.422740

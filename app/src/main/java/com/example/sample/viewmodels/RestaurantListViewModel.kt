@@ -13,8 +13,6 @@ import kotlinx.coroutines.launch
 
 class RestaurantListViewModel(private val restaurantRepository: RestaurantRepository) : ViewModel() {
 
-    private lateinit var restaurant:Restaurant
-
     private val restaurantsList: MutableLiveData<List<Restaurant>> by lazy {
         MutableLiveData<List<Restaurant>>().also {
             loadRestaurants()
@@ -24,6 +22,8 @@ class RestaurantListViewModel(private val restaurantRepository: RestaurantReposi
     private val event: MutableLiveData<Event<ViewEvent>> by lazy {
         MutableLiveData<Event<ViewEvent>>()
     }
+
+    fun getRestaurantList(): LiveData<List<Restaurant>> = restaurantsList
 
     fun getEvents(): LiveData<Event<ViewEvent>> {
         return event

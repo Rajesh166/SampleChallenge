@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class Restaurant(
-        val id: Long = -1,
+        var id: Long = -1,
         val name: String = "",
         val description: String = "",
         var status: String = "",
