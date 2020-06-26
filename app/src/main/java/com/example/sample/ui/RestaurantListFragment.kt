@@ -52,7 +52,7 @@ class RestaurantListFragment : Fragment() {
                 loading.visibility = View.VISIBLE
                 retry.visibility = View.GONE
                 errorMessage.text = getString(R.string.wait_for_loading)
-                viewModel?.retryLoading()
+                viewModel?.loadRestaurants()
             }
         }
         setObservers()
@@ -64,7 +64,7 @@ class RestaurantListFragment : Fragment() {
             restaurantAdapter = RestaurantListAdapter(viewModel, RestaurantListAdapter.RESTAURANT_ITEM_TYPE)
             adapter = restaurantAdapter
         }
-
+        viewModel.loadRestaurants()
         val itemsSize = viewModel.fetchRestaurants()?.value?.size ?: 0
         if (itemsSize > 0) hideLoading()
         viewModel.fetchRestaurants()?.observe(viewLifecycleOwner, Observer { response ->
